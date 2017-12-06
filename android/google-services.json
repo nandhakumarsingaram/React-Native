@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "5128599820",
+    "firebase_url": "https://moneytracker-6666.firebaseio.com",
+    "project_id": "moneytracker-6666",
+    "storage_bucket": "moneytracker-6666.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:5128599820:android:773bb8926576528b",
+        "android_client_info": {
+          "package_name": "com.saymoney"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "5128599820-i3gtghhstrgtkh2cqvjvlurcekfjvire.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDV9Jm1bCZn63KIA0N3DEvaDrSQHS6iqM4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

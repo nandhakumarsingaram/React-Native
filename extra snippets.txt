@@ -1,0 +1,267 @@
+  showPicker = async (stateKey, options) => {
+    try {
+      var newState = {};
+      const {action, year, month, day} = await DatePickerAndroid.open(options);
+      if (action === DatePickerAndroid.dismissedAction) {
+        newState[stateKey + 'Text'] = 'dismissed';
+      } else {
+        // <<<< Newly selected date >>>>
+        var date = new Date(year, month, day);
+        newState[stateKey + 'Text'] = date.toLocaleDateString();
+        newState[stateKey + 'Date'] = date;
+      }
+      this.setState(newState);
+      alert(newState[stateKey+Text]);
+    } catch ({code, message}) {
+      console.warn(`Error in example '${stateKey}': `, message);
+    }
+  };
+
+<ToolbarAndroid style = { styles.headerText } 
+title ={ 'New Transaction' }
+/>
+
+    var navigationView = (
+    <View style={{flex: 1, backgroundColor: '#fff'}}>
+      <Menu />
+    </View>
+    );
+
+    <DrawerLayoutAndroid
+      drawerWidth={250}
+      drawerPosition={DrawerLayoutAndroid.positions.Left}
+      renderNavigationView={() => navigationView}>
+        <AddTransaction />
+    </DrawerLayoutAndroid>
+
+    return(
+      <Router  >
+        <Scene key = "root">
+     
+           <Scene
+           key = "main"
+           component = {Main}
+           initial
+           />
+           
+           <Scene
+           key = "add"
+           component = {AddTransaction}
+           title="add"
+           initial
+           />
+
+        </Scene>
+      </Router>
+
+
+
+  onCalender(){
+          try {
+            const {action, year, month, day} =  DatePickerAndroid.open({
+            // Use `new Date()` for current date.
+            // May 25 2020. Month 0 is January.
+            date: new Date()
+            });
+              if (action !== DatePickerAndroid.dismissedAction) {
+                // Selected year, month (0-11), day
+                () => this.onCalc(month,day)
+              }
+          } catch ({code, message}) {
+            console.warn('Cannot open date picker', message);
+          }
+  }
+
+import React from 'react';
+import Main from './app/components/Main';
+import Summary from './app/components/Summary';
+import Menu from './app/components/Menu';
+import Navbar from './app/components/Navbar';
+import AddTransaction from './app/components/AddTransaction';
+import { StyleSheet, 
+         Text, 
+         View,
+         DrawerLayoutAndroid } from 'react-native';
+import { Router, Scene } from 'react-native-router-flux'
+
+// https://blog.callstack.io/react-native-firebase-and-you-a07ae507910
+
+//firebase A - Z
+
+//https://www.youtube.com/playlist?list=PLzrVYRai0riT4WOQXE-B2IDEkeugarXqM
+
+//
+
+const SimpleApp = StackNavigator({
+  //Home: { screen: Login },
+  Home : { screen: Register},
+  Main: { screen: Main},
+  New : { screen: AddTransaction},
+
+});
+
+export default SimpleApp;
+
+//
+
+static navigationOptions={
+  title:'New Transaction',
+  header:null
+};
+
+//onPress = {() => navigate('New')}
+
+//
+
+export default class App extends React.Component {
+
+   render() {
+    return(
+      <Router>
+           <Scene
+           key = "tabbar"
+           tabs
+           tabBarPosition = {'bottom'}
+           tabBarStyle = {Styles.tabbar}
+           >
+
+             <Scene
+             key = "main"
+             hideNavBar = {true}
+             component = {Main}
+             title = "Transactions"
+             initial
+             />
+             <Scene
+             key = "add"
+             hideNavBar = {true}
+             component = {AddTransaction}
+             title = "Add"
+             />
+             <Scene
+             key = "summary"
+             hideNavBar = {true}
+             component = {Summary}
+             title="Summary"
+             />
+             </Scene>
+      </Router>
+    );
+  }
+}
+
+
+const Styles = {
+  drawer: { shadowColor: '#000000', shadowOpacity: 0.8, shadowRadius: 3},
+  main: {paddingLeft: 3},
+  toolbar:{
+    height: 60,
+    backgroundColor: '#00BCD4',
+  },
+  tabbar:{
+    bottom: 20,
+    height: 35,
+  },
+}
+
+//
+
+export default class App extends React.Component {
+  renderScene(route, navigator){
+    switch(route.name){
+      case 'login':return(
+        <Main />
+      );
+      case 'register' :return(
+        <AddTransaction />
+      );
+    }
+  }
+  render(){
+    return(
+      <Navigator
+        initialRoute={{name:'login'}}
+        renderScene={this.renderScene}
+      />
+    );
+  }
+}
+
+
+
+register(){
+  //alert(this.state.email);
+  firebaseApp.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+  .then(()=>{
+    Alert.alert(
+      'Alert Title',
+      'register email: '+this.state.email,
+      [
+        {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'OK', onPress: () => this.navigate('Main')},
+      ],
+      { cancelable: false }
+    )
+    this.setState({
+      email:'',
+      password:''
+    });
+  })
+  .catch(function(error) {
+      Alert.alert(
+      'Alert Title',
+      'registered', + error,
+      [
+        {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'OK', onPress: () => this.navigate('Main')},
+      ],
+      { cancelable: false }
+    )
+  });
+}
+// menu try
+
+import { Menu, MenuOption, MenuTrigger, MenuOptions } from 'react-native-popup-menu';
+
+var menu = (
+    <Menu>
+      <MenuTrigger text='Select action' />
+      <MenuOptions>
+        <MenuOption onSelect={() => alert(`Save`)} text='Save' />
+        <MenuOption onSelect={() => alert(`Delete`)} >
+          <Text style={{color: 'red'}}>Delete</Text>
+        </MenuOption>
+        <MenuOption onSelect={() => alert(`Not called`)} disabled={true} text='Disabled' />
+      </MenuOptions>
+    </Menu>
+);
+
+//
+
+  showPicker = async (stateKey, options) => {
+    try {
+      var newState = {};
+      const {action, year, month, day} = await DatePickerAndroid.open(options);
+      if (action === DatePickerAndroid.dismissedAction) {
+        newState[stateKey + 'Text'] = 'dismissed';
+      } else {
+        var date = new Date(year, month, day);
+        //newState[stateKey + 'Text'] = date.toLocaleDateString();
+        //newState[stateKey + 'Date'] = date;
+        this.onSetDate(day,month,year);
+      }
+      //this.setState(newState);
+    } catch ({code, message}) {
+      console.warn(`Error in example '${stateKey}': `, message);
+    }
+  };
+
+//
+
+//toobar action 
+//onActionSelected={this.onActionSelected}
+
+//
+

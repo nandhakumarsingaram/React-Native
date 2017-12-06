@@ -25,10 +25,9 @@ constructor(){
       month : '',
       year : '',
       months : ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-      userId : firebaseApp.auth().currentUser.uid,
-    /*data : firebaseApp.database.ref('users').child(userId).on("child_added",snap=>{
-
-    })*/
+      data : firebaseApp.database().ref('users').child(firebaseApp.auth().currentUser.uid).on("value",snap => {
+        alert(JSON.stringify(snap.val()));
+    })
   }
 }
 

@@ -265,3 +265,8 @@ var menu = (
 
 //
 
+      data : firebaseApp.database().ref('users').child(firebaseApp.auth().currentUser.uid).on("value",snap => {
+        alert(JSON.stringify(snap.val()));
+    })
+
+//

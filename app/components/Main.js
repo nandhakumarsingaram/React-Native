@@ -26,12 +26,11 @@ constructor(){
       year : '',
       months : ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
       data : firebaseApp.database().ref('users').child(firebaseApp.auth().currentUser.uid).on("value",snap => {
-        alert(JSON.stringify(snap.val()));
+        let datas = JSON.stringify(snap.val());
+        alert(datas[0].amount);
     })
   }
 }
-
-
 
 logout(){
     firebaseApp.auth().signOut().then(function() {
